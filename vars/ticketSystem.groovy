@@ -6,7 +6,7 @@ def call(Map stageParams) {
     ])
 }
 
-def build(Map stageParams) {
+def build() {
     
     sh "cd salary && make"
 }
