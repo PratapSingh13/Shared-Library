@@ -8,5 +8,5 @@ def call(Map stageParams) {
 
 def build(Map stageParams) {
     
-    sh "cd attendance && make"
+    sh "cd salary && make"
 }
