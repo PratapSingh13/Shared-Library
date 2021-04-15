@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-def call(String terraformAction)
+def call(Map stepsParams)
 {
     stage('Code Checkout')
     {
