@@ -8,12 +8,12 @@ def call(Map stepsParams)
     }
     stage('Initializing Terraform Code')
     {
-        //sh 'terraform init'
+        sh 'terraform init'
         echo "Hello Y"
     }
     stage('Validating Terraform Code')
     {
-        //sh 'terraform validate'
+        sh 'terraform validate'
         echo "Hello YP"
     }
     stage('Checking Formatting')
