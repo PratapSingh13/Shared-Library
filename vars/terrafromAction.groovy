@@ -1,39 +1,30 @@
 #!/usr/bin/env groovy
-def call(Map stepsParams)
+def call(String terraformAction)
 {
     stage('Code Checkout')
     {
         git branch: "${stepsParams.branch}",
         url: "${stepsParams.git_url}"
     }
-    //dir('Terraform')
-
-        stage('Initializing Terraform Code')
-        {
-            sh 'terraform init'
-            echo "Hello Y"
-        }
-        stage('Validating Terraform Code')
-        {
-            sh 'pwd'
-            sh 'terraform validate'
-            echo "Hello YP"
-        }
-        stage('Checking Formatting')
-        {
-            //sh 'terraform fmt'
-            echo "Hello YPS"
-        }
-        stage('Applying Plan')
-        {
-            //sh 'terraform plan'
-            echo "Hello YPSB"
-        }
-        stage('Applying Terraform Code')
-        {
-            //input message: 'Press Yes to apply changes', ok: 'YES'
-            //h 'terraform apply -lock=false -auto-approve'
-            echo "Hello P"
-        }
-    
+    stage('Initializing Terraform Code')
+    {
+        sh 'terraform init'
+    }
+    stage('Validating Terraform Code')
+    {
+        sh 'terraform validate'
+    }
+    stage('Checking Formatting')
+    {
+        sh 'terraform fmt'
+    }
+    stage('Applying Plan')
+    {
+        sh 'terraform plan'
+    }
+    stage('Applying Terraform Code')
+    {
+        input message: 'Press Yes to apply changes', ok: 'YES'
+        sh 'terraform apply -lock=false -auto-approve'
+    }
 }
