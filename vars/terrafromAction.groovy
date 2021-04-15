@@ -6,8 +6,8 @@ def call(Map stepsParams)
         git branch: "${stepsParams.branch}",
         url: "${stepsParams.git_url}"
     }
-    dir('Terraform')
-    {
+    //dir('Terraform')
+
         stage('Initializing Terraform Code')
         {
             sh 'terraform init'
@@ -15,6 +15,7 @@ def call(Map stepsParams)
         }
         stage('Validating Terraform Code')
         {
+            sh 'pwd'
             sh 'terraform validate'
             echo "Hello YP"
         }
@@ -34,5 +35,5 @@ def call(Map stepsParams)
             //h 'terraform apply -lock=false -auto-approve'
             echo "Hello P"
         }
-    }
+    
 }
