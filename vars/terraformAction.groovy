@@ -3,6 +3,14 @@ def executeAction(Map stepParams)
 {
     dir("${stepParams.codePath}") 
     {
-        sh "terraform ${stepParams.operation}"
+        
+        if ("${stepParams.operation}" == "plan")
+        {
+            sh "terraform ${stepParams.operation} > plan.out"
+        }
+        else
+        {
+            sh "terraform ${stepParams.operation}"
+        }
     }
 }
