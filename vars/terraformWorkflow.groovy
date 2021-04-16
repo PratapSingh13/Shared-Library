@@ -18,7 +18,7 @@ def lintTerraformCode(Map stepParams) {
 }
 
 def planInfrastructure(Map stepParams) {
-    stage("Planning ${stepParams.actionMessage}") {
+    stage("Planning Terraform Code) {
         terraform.executeOperation(
             codePath: "${config.CODE_BASE_PATH}",
             operation: "plan"
@@ -27,7 +27,7 @@ def planInfrastructure(Map stepParams) {
 }
 
 def createInfrastructure(Map stepParams) {
-    stage("Applying ${stepParams.actionMessage}") {
+    stage("Applying Terraform) {
         terraform.executeOperation(
             codePath: "${config.CODE_BASE_PATH}",
             operation: "apply -auto-approve"
