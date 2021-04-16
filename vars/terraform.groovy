@@ -15,7 +15,7 @@ def codeCheckout(Map stepParams)
             //sendFailedNotification(
             //channelName: "${stepParams.slackChannel}",
             //message: "Failed while Code Checkout"
-        )
+        //)
         echo e.toString()
         throw e
         }
@@ -46,7 +46,7 @@ def initializeTerraform(Map stepParams)
             //sendFailedNotification(
             //channelName: "${stepParams.slackChannel}",
             //message: "Failed while initializing terraform modules"
-        )
+        //)
         echo e.toString()
         throw e
         }
@@ -69,7 +69,7 @@ def lintTerraformCode(Map stepParams)
             //sendFailedNotification(
             //channelName: "${stepParams.slackChannel}",
             //message: "Failed while linting code"
-        )
+        //)
         echo e.toString()
         throw e
         }
@@ -92,7 +92,7 @@ def validateTerraform(Map stepParams)
             //sendFailedNotification(
             //channelName: "${stepParams.slackChannel}",
             //message: "Failed while Validating"
-        )
+        //)
         echo e.toString()
         throw e
         }
@@ -115,7 +115,7 @@ def planInfrastructure(Map stepParams)
             //sendFailedNotification(
             //channelName: "${stepParams.slackChannel}",
             //message: "Failed while planning"
-        )
+        //)
         echo e.toString()
         throw e
         }
@@ -138,7 +138,7 @@ def createInfrastructure(Map stepParams)
             //sendFailedNotification(
             //channelName: "${stepParams.slackChannel}",
             //message: "Failed while applying"
-        )
+        //)
         echo e.toString()
         throw e
         }
