@@ -27,7 +27,7 @@ def planInfrastructure(Map stepParams) {
 }
 
 def createInfrastructure(Map stepParams) {
-    stage("Applying Terraform) {
+    stage("Applying Terraform") {
         terraform.executeOperation(
             codePath: "${config.CODE_BASE_PATH}",
             operation: "apply -auto-approve"
