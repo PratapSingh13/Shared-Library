@@ -9,7 +9,7 @@ def codeCheckout(Map stepParams)
         echo "${git_url}"
         try
         {
-            git'${git_url}
+            git '${git_url}'
         }
         catch(Exception e)
         {
