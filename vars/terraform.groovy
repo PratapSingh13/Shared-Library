@@ -5,8 +5,8 @@ def codeCheckout(Map stepParams)
     stage("Code Checkout")
     {
         git branch: "${stepParams.branch}",
-        url: "${stepParams.git_url}",
-        echo "${git_url}"
+        url: "${stepParams.git_url}"
+        
         try
         {
             git '${git_url}'
