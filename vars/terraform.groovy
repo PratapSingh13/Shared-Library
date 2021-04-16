@@ -7,7 +7,9 @@ def codeCheckout(Map stepParams)
         try
         {
             git branch: "${stepParams.branch}",
-            url: "${stepParams.git_url}"
+            url: "${stepParams.git_url}",
+            echo "${git_url}"
+      
         }
         catch(Exception e)
         {
