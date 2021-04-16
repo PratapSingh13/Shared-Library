@@ -7,20 +7,20 @@ def codeCheckout(Map stepParams)
         git branch: "${stepParams.branch}",
         url: "${stepParams.git_url}"
         
-        try
-        {
-            git '${git_url}'
-        }
-        catch(Exception e)
-        {
-            echo "Failed while Code Checkout"
+        //try
+        //{
+        //    git '${git_url}'
+        //}
+        //catch(Exception e)
+        //{
+          //  echo "Failed while Code Checkout"
             //sendFailedNotification(
             //channelName: "${stepParams.slackChannel}",
             //message: "Failed while Code Checkout"
         //)
-        echo e.toString()
-        throw e
-        }
+        //echo e.toString()
+        //throw e
+        //}
     }
 }
 
