@@ -18,7 +18,7 @@ def lintTerraformCode(Map stepParams) {
 }
 
 def planInfrastructure(Map stepParams) {
-    stage("Planning Terraform Code) {
+    stage("Planning Terraform Code") {
         terraform.executeOperation(
             codePath: "${config.CODE_BASE_PATH}",
             operation: "plan"
