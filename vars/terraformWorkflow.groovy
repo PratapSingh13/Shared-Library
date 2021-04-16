@@ -164,6 +164,23 @@ def call(Map stepParams) {
         echo e.toString()
         throw e
     }
+    
+    try 
+    {
+        lintingTerraformCode(
+            codeBasePath: "${config.CODE_BASE_PATH}"
+        )
+    } 
+    catch (Exception e) 
+    {
+        echo "Failed while linting Terraform Code! Please look into your code"
+        sendFailNotification(
+            channelName: "${config.SLACK_CHANNEL_NAME}",
+            message: "Failed while linting Terraform Code! Please look into your code"
+        )
+        echo e.toString()
+        throw e
+    }
 
     try 
     {
@@ -177,23 +194,6 @@ def call(Map stepParams) {
         sendFailNotification(
             channelName: "${config.SLACK_CHANNEL_NAME}",
             message: "Failed while planning"
-        )
-        echo e.toString()
-        throw e
-    }
-
-    try 
-    {
-        lintingTerraformCode(
-            codeBasePath: "${config.CODE_BASE_PATH}"
-        )
-    } 
-    catch (Exception e) 
-    {
-        echo "Failed while linting Terraform Code! Please look into your code"
-        sendFailNotification(
-            channelName: "${config.SLACK_CHANNEL_NAME}",
-            message: "Failed while linting Terraform Code! Please look into your code"
         )
         echo e.toString()
         throw e
@@ -228,24 +228,4 @@ def sendSlackNotification(Map stepParams) {
     slackSend channel: "${stepParams.slackChannel}",
     color: "${stepParams.buildStatus}",
     message: "JOB_NAME:- ${env.JOB_NAME}\n BUILD_URL:- ${env.BUILD_URL}\n"
-}
-
-def slackSuccessNotification(Map stepParams) 
-{
-    stage("Sending Notification for Success on Slack") 
-    {
-        notification.sendSlackNotification(
-            slackChannel: "${stepParams.channelName}",
-            buildStatus: "good"
-        )
-    }
-}
-
-def slackFailNotification(Map stepParams) {
-    stage("Sending Notification for Failures on Slack") {
-        notification.sendSlackNotification(
-            slackChannel: "${stepParams.channelName}",
-            buildStatus: "danger"
-        )
-    }
 }
