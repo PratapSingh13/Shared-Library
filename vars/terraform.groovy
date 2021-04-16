@@ -6,8 +6,8 @@ def codeCheckout(Map stepParams)
     {
         try
         {
-            git branch: "${stepsParams.branch}",
-            url: "${stepsParams.git_url}"
+            git branch: "${stepParams.branch}",
+            url: "${stepParams.git_url}"
             sh 'git clone --branch ${branch} ${git_url}'
         }
         catch(Exception e)
