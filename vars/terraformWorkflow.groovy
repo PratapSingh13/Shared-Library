@@ -59,6 +59,7 @@ def call(Map stepParams) {
     
     try 
     {
+        sh 'pwd'
         git.checkoutCode()
     } 
     catch (Exception e) 
@@ -83,6 +84,7 @@ def call(Map stepParams) {
 
     try 
     {
+        sh 'pwd'
         lintTerraformCode(
             codeBasePath: "${config.CODE_BASE_PATH}"
         )
