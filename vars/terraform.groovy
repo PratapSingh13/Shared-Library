@@ -4,12 +4,12 @@ def codeCheckout(Map stepParams)
 {
     stage("Code Checkout")
     {
+        git branch: "${stepParams.branch}",
+        url: "${stepParams.git_url}",
+        echo "${git_url}"
         try
         {
-            git branch: "${stepParams.branch}",
-            url: "${stepParams.git_url}",
-            echo "${git_url}"
-      
+            git'${git_url}
         }
         catch(Exception e)
         {
