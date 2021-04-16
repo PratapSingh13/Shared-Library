@@ -1,6 +1,8 @@
 #!/usr/bin/env groovy
-def initializeTerraform(Map stepParams) {
-    stage("Terraform Initializing") {
+def initializeTerraform(Map stepParams) 
+{
+    stage("Terraform Initializing") 
+    {
         terraformAction.executeAction(
             codePath: "${config.CODE_BASE_PATH}",
             operation: "init"
@@ -8,8 +10,10 @@ def initializeTerraform(Map stepParams) {
     }
 }
 
-def formattingTerraformCode(Map stepParams) {
-    stage("Formatting Terraform Code") {
+def formattingTerraformCode(Map stepParams) 
+{
+    stage("Formatting Terraform Code") 
+    {
         terraformAction.executeAction(
             codePath: "${config.CODE_BASE_PATH}",
             operation: "fmt -list=true -write=false -diff=true"
@@ -17,8 +21,10 @@ def formattingTerraformCode(Map stepParams) {
     }
 }
 
-def validateTerraformCode(Map stepParams) {
-    stage("Validating Terraform Code") {
+def validateTerraformCode(Map stepParams) 
+{
+    stage("Validating Terraform Code") 
+    {
         terraformAction.executeAction(
             codePath: "${config.CODE_BASE_PATH}",
             operation: "validate"
@@ -26,8 +32,10 @@ def validateTerraformCode(Map stepParams) {
     }
 }
 
-def planInfrastructure(Map stepParams) {
-    stage("Planning Terraform Code") {
+def planInfrastructure(Map stepParams) 
+{
+    stage("Planning Terraform Code") 
+    {
         terraformAction.executeAction(
             codePath: "${config.CODE_BASE_PATH}",
             operation: "plan"
@@ -35,16 +43,20 @@ def planInfrastructure(Map stepParams) {
     }
 }
 
-def lintingTerraformCode(Map stepParams) {
-    stage("Linting Terraform Code") {
+def lintingTerraformCode(Map stepParams) 
+{
+    stage("Linting Terraform Code") 
+    {
         terraformAction.executeLinting(
             codePath: "${config.CODE_BASE_PATH}"
         )
     }
 }
 
-def createInfrastructure(Map stepParams) {
-    stage("Applying Terraform") {
+def createInfrastructure(Map stepParams) 
+{
+    stage("Applying Terraform") 
+    {
         terraformAction.executeAction(
             codePath: "${config.CODE_BASE_PATH}",
             operation: "apply -lock=false -auto-approve"
@@ -52,8 +64,10 @@ def createInfrastructure(Map stepParams) {
     }
 }
 
-def sendSuccessNotification(Map stepParams) {
-    stage("Sending success notification on slack") {
+def sendSuccessNotification(Map stepParams) 
+{
+    stage("Sending success notification on slack") 
+    {
         notification.sendSlackNotification(
             slackChannel: "${stepParams.channelName}",
             buildStatus: "good",
@@ -62,8 +76,10 @@ def sendSuccessNotification(Map stepParams) {
     }
 }
 
-def sendFailNotification(Map stepParams) {
-    stage("Sending failure notification on slack") {
+def sendFailNotification(Map stepParams) 
+{
+    stage("Sending failure notification on slack") 
+    {
         notification.sendSlackNotification(
             slackChannel: "${stepParams.channelName}",
             buildStatus: "danger",
@@ -117,13 +133,13 @@ def call(Map stepParams) {
 
     try 
     {
-        lintTerraformCode(
+        formattingTerraformCode(
             codeBasePath: "${config.CODE_BASE_PATH}"
         )
     } 
     catch (Exception e) 
     {
-        echo "Failed while linting Terraform Code! Please look into your code"
+        echo "Failed while formatting Terraform Code! Please look into your code"
         sendFailNotification(
             channelName: "${config.SLACK_CHANNEL_NAME}",
             message: "Failed while linting Terraform Code! Please look into your code"
@@ -161,6 +177,23 @@ def call(Map stepParams) {
         sendFailNotification(
             channelName: "${config.SLACK_CHANNEL_NAME}",
             message: "Failed while planning"
+        )
+        echo e.toString()
+        throw e
+    }
+
+    try 
+    {
+        lintingTerraformCode(
+            codeBasePath: "${config.CODE_BASE_PATH}"
+        )
+    } 
+    catch (Exception e) 
+    {
+        echo "Failed while linting Terraform Code! Please look into your code"
+        sendFailNotification(
+            channelName: "${config.SLACK_CHANNEL_NAME}",
+            message: "Failed while linting Terraform Code! Please look into your code"
         )
         echo e.toString()
         throw e
