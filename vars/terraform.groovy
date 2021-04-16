@@ -4,7 +4,7 @@ def codeCheckout(Map stepParams)
 {
     stage("Code Checkout")
     {
-        git branch: "${stepParams.branch}",
+        //git branch: "${stepParams.branch}",
         url: "${stepParams.git_url}"
         
         //try
