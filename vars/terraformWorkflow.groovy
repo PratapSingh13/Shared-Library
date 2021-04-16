@@ -163,6 +163,7 @@ def call(Map stepParams) {
         createInfrastructure(
             codeBasePath: "${config.CODE_BASE_PATH}"
         )
+        approvalStep()
     } 
     catch (Exception e) 
     {
