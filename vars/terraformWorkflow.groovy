@@ -8,8 +8,8 @@ def initializeTerraform(Map stepParams) {
     }
 }
 
-def lintTerraformCode(Map stepParams) {
-    stage("Linting Terraform Code") {
+def formattingTerraformCode(Map stepParams) {
+    stage("Formatting Terraform Code") {
         terraformAction.executeAction(
             codePath: "${config.CODE_BASE_PATH}",
             operation: "fmt -list=true -write=false -diff=true"
@@ -31,6 +31,14 @@ def planInfrastructure(Map stepParams) {
         terraformAction.executeAction(
             codePath: "${config.CODE_BASE_PATH}",
             operation: "plan"
+        )
+    }
+}
+
+def lintingTerraformCode(Map stepParams) {
+    stage("Linting Terraform Code") {
+        terraformAction.executeLinting(
+            codePath: "${config.CODE_BASE_PATH}"
         )
     }
 }
