@@ -1,5 +1,5 @@
 #!/usr/bin env groovy
-def executeOperation(Map stepParams) 
+def executeActions(Map stepParams) 
 {
     dir("${stepParams.codePath}") 
     {
