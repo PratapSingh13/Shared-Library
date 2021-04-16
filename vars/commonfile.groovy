@@ -1,9 +1,7 @@
 #!/usr/bin/env groovy
 
 def approvalStep() {
-    stage("Waiting for Approval") {
-        input 'Do you want to proceed or not?'
-    }
+    input message: 'Press Yes to apply changes', ok: 'YES'
 }
 
 def readPropertyFile(Map stepParams) {
