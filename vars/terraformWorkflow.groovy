@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 def initializeTerraform(Map stepParams) {
-    stage("Initializing Terraform") {
-        terraform.executeOperation(
+    stage("Terraform Initializing") {
+        terraformAction.executeAction(
             codePath: "${config.CODE_BASE_PATH}",
             operation: "init"
         )
@@ -10,16 +10,25 @@ def initializeTerraform(Map stepParams) {
 
 def lintTerraformCode(Map stepParams) {
     stage("Linting Terraform Code") {
-        terraform.executeOperation(
+        terraformAction.executeAction(
             codePath: "${config.CODE_BASE_PATH}",
             operation: "fmt -list=true -write=false -diff=true"
         )
     }
 }
 
+def validateTerraformCode(Map stepParams) {
+    stage("Validating Terraform Code") {
+        terraformAction.executeAction(
+            codePath: "${config.CODE_BASE_PATH}",
+            operation: "validate"
+        )
+    }
+}
+
 def planInfrastructure(Map stepParams) {
     stage("Planning Terraform Code") {
-        terraform.executeOperation(
+        terraformAction.executeAction(
             codePath: "${config.CODE_BASE_PATH}",
             operation: "plan"
         )
@@ -28,9 +37,9 @@ def planInfrastructure(Map stepParams) {
 
 def createInfrastructure(Map stepParams) {
     stage("Applying Terraform") {
-        terraform.executeOperation(
+        terraformAction.executeAction(
             codePath: "${config.CODE_BASE_PATH}",
-            operation: "apply -auto-approve"
+            operation: "apply -lock=false -auto-approve"
         )
     }
 }
@@ -59,12 +68,11 @@ def call(Map stepParams) {
     
     try 
     {
-        sh 'pwd'
         git.checkoutCode()
     } 
     catch (Exception e) 
     {
-        echo "Failed while clonning the codebase"
+        echo "Unable to clone CodeBase"
         echo e.toString()
         throw e
     }
@@ -74,27 +82,43 @@ def call(Map stepParams) {
         config = commonfile.readPropertyFile(
             configFilePath: "${stepParams.configFilePath}"
         )
-    } 
+    }
     catch (Exception e) 
     {
-        echo "Failed while reading config file"
+        echo "Sorry I'm unable to read Config file"
         echo e.toString()
         throw e
     }
 
     try 
     {
-        sh 'pwd'
         lintTerraformCode(
             codeBasePath: "${config.CODE_BASE_PATH}"
         )
     } 
     catch (Exception e) 
     {
-        echo "Failed while linting code"
+        echo "Failed while linting Terraform Code! Please look into your code"
         sendFailNotification(
             channelName: "${config.SLACK_CHANNEL_NAME}",
-            message: "Failed while linting code"
+            message: "Failed while linting Terraform Code! Please look into your code"
+        )
+        echo e.toString()
+        throw e
+    }
+
+    try 
+    {
+        validateTerraformCode(
+            codeBasePath: "${config.CODE_BASE_PATH}"
+        )
+    } 
+    catch (Exception e) 
+    {
+        echo "Failed while Terraform Code Validation! Please look into your code"
+        sendFailNotification(
+            channelName: "${config.SLACK_CHANNEL_NAME}",
+            message: "Failed while Terraform Code Validation! Please look into your code"
         )
         echo e.toString()
         throw e
@@ -108,10 +132,10 @@ def call(Map stepParams) {
     } 
     catch (Exception e) 
     {
-        echo "Failed while initializing terraform modules"
+        echo "Unable to initialize Terraform"
         sendFailNotification(
             channelName: "${config.SLACK_CHANNEL_NAME}",
-            message: "Failed while initializing terraform modules"
+            message: "Unable to initialize Terraform"
         )
         echo e.toString()
         throw e
@@ -125,7 +149,7 @@ def call(Map stepParams) {
     } 
     catch (Exception e) 
     {
-        echo "Failed while planning infrastructure"
+        echo "Failed during planning Infrastructure"
         sendFailNotification(
             channelName: "${config.SLACK_CHANNEL_NAME}",
             message: "Failed while planning"
@@ -142,7 +166,7 @@ def call(Map stepParams) {
     } 
     catch (Exception e) 
     {
-        echo "Failed while creating infrastructure"
+        echo "Unable to Apply Terraform"
         sendFailNotification(
             channelName: "${config.SLACK_CHANNEL_NAME}",
             message: "Failed while applying"
@@ -154,4 +178,32 @@ def call(Map stepParams) {
         channelName: "${config.SLACK_CHANNEL_NAME}",
         message: "Successfully applied"   
     )
+}
+
+
+
+def sendSlackNotification(Map stepParams) {
+    slackSend channel: "${stepParams.slackChannel}",
+    color: "${stepParams.buildStatus}",
+    message: "JOB_NAME:- ${env.JOB_NAME}\n BUILD_URL:- ${env.BUILD_URL}\n"
+}
+
+def slackSuccessNotification(Map stepParams) 
+{
+    stage("Sending Notification for Success on Slack") 
+    {
+        notification.sendSlackNotification(
+            slackChannel: "${stepParams.channelName}",
+            buildStatus: "good"
+        )
+    }
+}
+
+def slackFailNotification(Map stepParams) {
+    stage("Sending Notification for Failures on Slack") {
+        notification.sendSlackNotification(
+            slackChannel: "${stepParams.channelName}",
+            buildStatus: "danger"
+        )
+    }
 }
