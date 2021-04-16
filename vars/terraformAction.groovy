@@ -4,7 +4,7 @@ def executeAction(Map stepParams)
     dir("${stepParams.codePath}") 
     {
         
-        if ("${stepParams.operation}" == "plan")
+        if (${stepParams.operation} == "plan")
         {
             sh "terraform ${stepParams.operation} > plan.out"
         }
@@ -12,5 +12,13 @@ def executeAction(Map stepParams)
         {
             sh "terraform ${stepParams.operation}"
         }
+    }
+}
+
+def executeLinting(Map stepParams)
+{
+    dir("${stepParams.codePath}")
+    {
+        sh "tflint"
     }
 }
