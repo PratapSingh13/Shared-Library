@@ -89,6 +89,23 @@ def call(Map stepParams) {
         echo e.toString()
         throw e
     }
+    
+    try 
+    {
+        initializeTerraform(
+            codeBasePath: "${config.CODE_BASE_PATH}",
+        )
+    } 
+    catch (Exception e) 
+    {
+        echo "Unable to initialize Terraform"
+        sendFailNotification(
+            channelName: "${config.SLACK_CHANNEL_NAME}",
+            message: "Unable to initialize Terraform"
+        )
+        echo e.toString()
+        throw e
+    }
 
     try 
     {
@@ -119,23 +136,6 @@ def call(Map stepParams) {
         sendFailNotification(
             channelName: "${config.SLACK_CHANNEL_NAME}",
             message: "Failed while Terraform Code Validation! Please look into your code"
-        )
-        echo e.toString()
-        throw e
-    }
-    
-    try 
-    {
-        initializeTerraform(
-            codeBasePath: "${config.CODE_BASE_PATH}",
-        )
-    } 
-    catch (Exception e) 
-    {
-        echo "Unable to initialize Terraform"
-        sendFailNotification(
-            channelName: "${config.SLACK_CHANNEL_NAME}",
-            message: "Unable to initialize Terraform"
         )
         echo e.toString()
         throw e
