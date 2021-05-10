@@ -201,10 +201,11 @@ def call(Map stepParams) {
 
     try 
     {
-        input message: 'Press Yes to apply changes', ok: 'YES'
+        
         createInfrastructure(
             codeBasePath: "${config.CODE_BASE_PATH}"
         )
+        input message: 'Press Yes to apply changes', ok: 'YES'
     } 
     catch (Exception e) 
     {
