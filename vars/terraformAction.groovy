@@ -4,9 +4,9 @@ def executeAction(Map stepParams)
     dir("${stepParams.codePath}") 
     {
         
-        if ("${stepParams.operation}" == "plan")
+        if ("${stepParams.operation}" == "apply")
         {
-            sh "terraform ${stepParams.operation} > plan.out"
+            sh "terraform ${stepParams.operation} -lock=false -auto-approve"
         }
         else
         {
