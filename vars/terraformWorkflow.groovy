@@ -43,15 +43,15 @@ def planInfrastructure(Map stepParams)
     }
 }
 
-//def lintingTerraformCode(Map stepParams) 
-//{
-//    stage("Linting Terraform Code") 
-//    {
-//        terraformAction.executeLinting(
-//            codePath: "${config.CODE_BASE_PATH}"
-//        )
-//    }
-//}
+def lintingTerraformCode(Map stepParams) 
+{
+    stage("Linting Terraform Code") 
+    {
+        terraformAction.executeLinting(
+            codePath: "${config.CODE_BASE_PATH}"
+        )
+    }
+}
 
 def createInfrastructure(Map stepParams) 
 {
@@ -165,22 +165,22 @@ def call(Map stepParams) {
         throw e
     }
     
-    //try 
-    //{
-    //    lintingTerraformCode(
-    //        codeBasePath: "${config.CODE_BASE_PATH}"
-    //    )
-    //} 
-    //catch (Exception e) 
-    //{
-    //    echo "Failed while linting Terraform Code! Please look into your code"
-    //    sendFailNotification(
-    //        channelName: "${config.SLACK_CHANNEL_NAME}",
-    //        message: "Failed while linting Terraform Code! Please look into your code"
-    //    )
-    //    echo e.toString()
-    //    throw e
-    //}
+    try 
+    {
+        lintingTerraformCode(
+            codeBasePath: "${config.CODE_BASE_PATH}"
+        )
+    } 
+    catch (Exception e) 
+    {
+        echo "Failed while linting Terraform Code! Please look into your code"
+        sendFailNotification(
+            channelName: "${config.SLACK_CHANNEL_NAME}",
+            message: "Failed while linting Terraform Code! Please look into your code"
+        )
+        echo e.toString()
+        throw e
+    }
 
     try 
     {
