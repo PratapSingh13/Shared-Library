@@ -47,9 +47,13 @@ def lintingTerraformCode(Map stepParams)
 {
     stage("Linting Terraform Code") 
     {
+        rule "terraform_module_pinned_source" {
+  	    enabled = true
+  	    style = "flexible"
         terraformAction.executeLinting(
             codePath: "${config.CODE_BASE_PATH}"
         )
+        }
     }
 }
 
