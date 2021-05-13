@@ -1,24 +1,19 @@
 #!/usr/bin env groovy
 def executeAction(Map stepParams) 
 {
-    dir("${stepParams.codePath}") 
+  dir("${stepParams.codePath}") 
+  {  
+    if ("${stepParams.operation}" == "apply")
     {
-        
-        if ("${stepParams.operation}" == "apply")
-        {
-            sh "terraform ${stepParams.operation} -lock=false -auto-approve"
-        }
-        else
-        {
-            sh "terraform ${stepParams.operation}"
-        }
+      sh "terraform ${stepParams.operation} -lock=false -auto-approve"
     }
-}
-
-def executeLinting(Map stepParams)
-{
-    dir("${stepParams.codePath}")
+    else
     {
-        sh "tflint"
+      sh "terraform ${stepParams.operation}"
     }
+    if ("${stepParams.operation}" == "destroy")
+    {
+      sh "terraform ${stepParams.operation} -lock=false -auto-approve"
+    }
+  }
 }
