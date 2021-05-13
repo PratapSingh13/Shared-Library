@@ -67,7 +67,7 @@ def call(Map stepParams) {
   }
   sendSuccessNotification(
     channelName: "${config.SLACK_CHANNEL_NAME}",
-    message: "Successfully applied"   
+    message: "Successfully Destroyed"   
   )
 }
 
