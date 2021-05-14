@@ -62,7 +62,7 @@ def sendSuccessNotification(Map stepParams)
 {
   stage("Sending success notification on slack") 
   {
-    notification.sendGoogleNotification(
+    googleChatNotification.sendGoogleNotification(
       buildStatus: "good",
       message: "${stepParams.message}"
     )
@@ -72,7 +72,7 @@ def sendFailNotification(Map stepParams)
 {
   stage("Sending failure notification on slack") 
   {
-    notification.sendGoogleNotification(
+    googleChatNotification.sendGoogleNotification(
       buildStatus: "danger",
       message: "${stepParams.message}"
     )
