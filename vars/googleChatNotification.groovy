@@ -8,3 +8,9 @@ def sendGoogleNotification(Map stepParams) {
     message: "*Job* :  *${env.JOB_NAME}* started by *${user}* user with buildnumber *${env.BUILD_NUMBER}* was ${stepParams.buildStatus} . BUILD_URL:- ${env.BUILD_URL}"   
   }
 }
+
+sendGoogleChatBuildReport(Version: env.VERSION,
+    message: "This is a <strike>simple</strike> <i>card<i> text message " +
+                 "with a <a href=\"https://github.com/mkutz/jenkins-google-chat-notification\">link</a>" +
+                 "<br>and a line break, " +
+                 "which does not support mention @all users in the Group.")
