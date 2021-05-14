@@ -5,7 +5,7 @@ def sendGoogleNotification(Map stepParams) {
     def build_num = env.BUILD_NUMBER
     def job_name = env.JOB_NAME
     googlechatnotification url: "https://chat.googleapis.com/v1/spaces/AAAAuvH0DTI/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=6bxkYEGZWPNi1G449fc7FCvyX7PP5v6Xx1rLo3uWLTE%3D",
-    notifySuccess: 'true',
+    notifySuccess: 'false',
     message: "*Job* :  ${env.JOB_NAME} \n *started by* _${user}_ user \n *Buildnumber* ${env.BUILD_NUMBER} \n *Status* _${stepParams.buildStatus}_ \n *BUILD_URL*:- ${env.BUILD_URL}"   
   }
 }
