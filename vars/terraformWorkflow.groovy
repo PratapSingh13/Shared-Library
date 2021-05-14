@@ -111,7 +111,6 @@ def call(Map stepParams) {
   {
     echo "Unable to initialize Terraform"
     sendFailNotification(
-      channelName: "${config.SLACK_CHANNEL_NAME}",
       message: "Unable to initialize Terraform"
     )
     echo e.toString()
@@ -127,7 +126,6 @@ def call(Map stepParams) {
   {
     echo "Failed while formatting Terraform Code! Please look into your code"
     sendFailNotification(
-      channelName: "${config.SLACK_CHANNEL_NAME}",
       message: "Failed while linting Terraform Code! Please look into your code"
     )
     echo e.toString()
@@ -143,7 +141,6 @@ def call(Map stepParams) {
   {
     echo "Failed while Terraform Code Validation! Please look into your code"
     sendFailNotification(
-      channelName: "${config.SLACK_CHANNEL_NAME}",
       message: "Failed while Terraform Code Validation! Please look into your code"
     )
     echo e.toString()
@@ -175,7 +172,6 @@ def call(Map stepParams) {
   {
     echo "Failed during planning Infrastructure"
     sendFailNotification(
-      channelName: "${config.SLACK_CHANNEL_NAME}",
       message: "Failed while planning"
     )
     echo e.toString()
@@ -192,14 +188,12 @@ def call(Map stepParams) {
   {
     echo "Unable to Apply Terraform"
     sendFailNotification(
-      channelName: "${config.SLACK_CHANNEL_NAME}",
       message: "Failed while applying"
     )
     echo e.toString()
     throw e
   }
   sendSuccessNotification(
-    channelName: "${config.SLACK_CHANNEL_NAME}",
     message: "Successfully applied"   
   )
 }
