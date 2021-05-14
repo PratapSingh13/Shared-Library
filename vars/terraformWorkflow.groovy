@@ -60,7 +60,7 @@ def createInfrastructure(Map stepParams)
 }
 def sendSuccessNotification(Map stepParams) 
 {
-  stage("Sending success notification on slack") 
+  stage("Sending success notification on Google Chat") 
   {
     googleChatNotification.sendGoogleNotification(
       buildStatus: "good",
@@ -70,7 +70,7 @@ def sendSuccessNotification(Map stepParams)
 }
 def sendFailNotification(Map stepParams) 
 {
-  stage("Sending failure notification on slack") 
+  stage("Sending failure notification on Google Chat") 
   {
     googleChatNotification.sendGoogleNotification(
       buildStatus: "danger",
