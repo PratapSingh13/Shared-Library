@@ -62,11 +62,10 @@ def sendSuccessNotification(Map stepParams)
 {
   stage("Sending success notification on Google Chat") 
   {
-    sendGoogleChatBuildReport(Version: env.VERSION,
-    message: "This is a <strike>simple</strike> <i>card<i> text message " +
-                 "with a <a href=\"https://github.com/mkutz/jenkins-google-chat-notification\">link</a>" +
-                 "<br>and a line break, " +
-                 "which does not support mention @all users in the Group.")
+    googleChatNotification.sendGoogleNotification(
+      buildStatus: "BUILD SUCCESSFUL",
+      message: "${stepParams.message}"
+    )
   }
 }
 def sendFailNotification(Map stepParams) 
