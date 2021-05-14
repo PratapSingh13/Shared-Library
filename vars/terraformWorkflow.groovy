@@ -105,7 +105,7 @@ def call(Map stepParams) {
   }
   try 
   {
-    nitializeTerraform(
+    initializeTerraform(
       codeBasePath: "${config.CODE_BASE_PATH}",
     )
   } 
