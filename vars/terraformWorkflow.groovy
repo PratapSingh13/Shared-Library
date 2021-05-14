@@ -63,7 +63,7 @@ def sendSuccessNotification(Map stepParams)
   stage("Sending success notification on Google Chat") 
   {
     googleChatNotification.sendGoogleNotification(
-      buildStatus: "good",
+      buildStatus: "BUILD SUCCESSFUL",
       message: "${stepParams.message}"
     )
   }
@@ -73,7 +73,7 @@ def sendFailNotification(Map stepParams)
   stage("Sending failure notification on Google Chat") 
   {
     googleChatNotification.sendGoogleNotification(
-      buildStatus: "danger",
+      buildStatus: "BUILD FAILED",
       message: "${stepParams.message}"
     )
   }
