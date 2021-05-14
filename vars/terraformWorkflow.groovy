@@ -194,7 +194,7 @@ def call(Map stepParams) {
     throw e
   }
   sendSuccessNotification(
-    message: "Successfully applied"   
+    message: "Terraform build <strike>Successfully applied</strike>"   
   )
 }
 
