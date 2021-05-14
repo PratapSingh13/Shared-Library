@@ -63,7 +63,6 @@ def sendSuccessNotification(Map stepParams)
   stage("Sending success notification on slack") 
   {
     notification.sendGoogleNotification(
-      slackChannel: "${stepParams.channelName}",
       buildStatus: "good",
       message: "${stepParams.message}"
     )
@@ -74,7 +73,6 @@ def sendFailNotification(Map stepParams)
   stage("Sending failure notification on slack") 
   {
     notification.sendGoogleNotification(
-      slackChannel: "${stepParams.channelName}",
       buildStatus: "danger",
       message: "${stepParams.message}"
     )
@@ -205,17 +203,13 @@ def call(Map stepParams) {
     message: "Successfully applied"   
   )
 }
-def sendSlackNotification(Map stepParams) {
-  slackSend channel: "${stepParams.slackChannel}",
-  color: "${stepParams.buildStatus}",
-  message: "JOB_NAME:- ${env.JOB_NAME}\n BUILD_URL:- ${env.BUILD_URL}\n"
-}
-def sendGoogleNotification(Map stepParams) {
-  // if ( buildResult == "SUCCESS" ) {
-  googlechatnotification url: "https://chat.googleapis.com/v1/spaces/AAAAuvH0DTI/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=6bxkYEGZWPNi1G449fc7FCvyX7PP5v6Xx1rLo3uWLTE%3D",
-  message: "*Job* :  *${env.JOB_NAME}* started by *${env.BUILD_USER_ID}* user with buildnumber *${env.BUILD_NUMBER}* was ${stepParams.buildStatus} . BUILD_URL:- ${env.BUILD_URL}"   
-  // }
-}
+
+// def sendGoogleNotification(Map stepParams) {
+//   // if ( buildResult == "SUCCESS" ) {
+//   googlechatnotification url: "https://chat.googleapis.com/v1/spaces/AAAAuvH0DTI/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=6bxkYEGZWPNi1G449fc7FCvyX7PP5v6Xx1rLo3uWLTE%3D",
+//   message: "*Job* :  *${env.JOB_NAME}* started by *${env.BUILD_USER_ID}* user with buildnumber *${env.BUILD_NUMBER}* was ${stepParams.buildStatus} . BUILD_URL:- ${env.BUILD_URL}"   
+//   // }
+// }
 
 
 
