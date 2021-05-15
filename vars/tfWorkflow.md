@@ -1,5 +1,4 @@
-# Shared Library
-## Terraform Workflow
+# Terraform Workflow
 I'm Shared Library for terraform workflow which will execute and manage all terraform related operations.
 
 ### Prerequisites
@@ -45,5 +44,3 @@ ENVIRONMENT = prod
 | ENVIRONMENT | *mandatory* | Environment name for which pipeline is executing |
 
 ![](../img/terraform-workflow.png)
-
----
