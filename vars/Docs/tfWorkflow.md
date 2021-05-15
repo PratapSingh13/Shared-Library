@@ -44,4 +44,4 @@ ENVIRONMENT = prod
 | ENVIRONMENT | *mandatory* | Environment name for which pipeline is executing |
 
 ****Output****
-![](../img/terraformWorkflow.png)
+![](../../img/terraformWorkflow.png)

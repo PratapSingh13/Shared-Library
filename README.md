@@ -44,6 +44,6 @@ ENVIRONMENT = prod
 | GOOGLE_CHAT_URL | *manadatory* | URL of the Google Chat in which notification should be sent |
 | ENVIRONMENT | *mandatory* | Environment name for which pipeline is executing |
 
-![](../img/terraform-workflow.png)
+![](/img/terraformWorkflow.png)
 
 ---
