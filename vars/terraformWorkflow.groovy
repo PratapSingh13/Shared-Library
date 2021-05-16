@@ -177,15 +177,20 @@ def call(Map stepParams) {
     echo e.toString()
     throw e
   }
-  try 
+  if("${env.BRANCH_NAME}" == "master") 
   {
-    //input message: 'Press Yes to apply changes', ok: 'YES'
-    createInfrastructure(
-      codeBasePath: "${config.CODE_BASE_PATH}"
-    )
-  } 
-  catch (Exception e) 
-  {
+    if("${config.KEEP_APPROVAL_STAGE}" == "true" || "${config.KEEP_APPROVAL_STAGE}" == "null")
+    {
+      commonfile.approvalStep()
+    }
+    try
+    {
+      createInfrastructure(
+        codeBasePath: "${config.CODE_BASE_PATH}"
+      )
+    }
+    catch (Exception e) 
+    {
     echo "Unable to Apply Terraform"
     sendFailNotification(
       message: "Failed while applying"
@@ -196,4 +201,24 @@ def call(Map stepParams) {
   sendSuccessNotification(
     message: "Terraform build <strike>Successfully applied</strike>"   
   )
+
+  // try 
+  // {
+  //   //input message: 'Press Yes to apply changes', ok: 'YES'
+  //   createInfrastructure(
+  //     codeBasePath: "${config.CODE_BASE_PATH}"
+  //   )
+  // } 
+  // catch (Exception e) 
+  // {
+  //   echo "Unable to Apply Terraform"
+  //   sendFailNotification(
+  //     message: "Failed while applying"
+  //   )
+  //   echo e.toString()
+  //   throw e
+  // }
+  // sendSuccessNotification(
+  //   message: "Terraform build <strike>Successfully applied</strike>"   
+  // )
 }
