@@ -191,12 +191,13 @@ def call(Map stepParams) {
     }
     catch (Exception e) 
     {
-    echo "Unable to Apply Terraform"
-    sendFailNotification(
-      message: "Failed while applying"
-    )
-    echo e.toString()
-    throw e
+      echo "Unable to Apply Terraform"
+      sendFailNotification(
+        message: "Failed while applying"
+      )
+      echo e.toString()
+      throw e
+    }
     sendSuccessNotification(
       message: "Terraform build <strike>Successfully applied</strike>"   
     )
