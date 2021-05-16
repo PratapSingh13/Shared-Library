@@ -6,3 +6,9 @@ def checkoutCode() {
         checkout scm
     }
 }
+
+def checkoutBranch(BRANCH_NAME) {
+    stage("Checking out to branch") {
+        sh "git checkout ${BRANCH_NAME}"
+    }
+}
