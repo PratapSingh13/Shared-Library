@@ -197,11 +197,14 @@ def call(Map stepParams) {
     )
     echo e.toString()
     throw e
+    sendSuccessNotification(
+      message: "Terraform build <strike>Successfully applied</strike>"   
+    )
   }
-  sendSuccessNotification(
-    message: "Terraform build <strike>Successfully applied</strike>"   
-  )
-
+  else
+  {
+    echo "Skipping execution because of non-master branch!!!!"
+  }
   // try 
   // {
   //   //input message: 'Press Yes to apply changes', ok: 'YES'
