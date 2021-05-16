@@ -17,3 +17,11 @@ def executeAction(Map stepParams)
     }
   }
 }
+
+def executeLinting(Map stepParams)
+{
+  dir("${stepParams.codePath}")
+  {
+    sh "tflint"
+  }
+}
