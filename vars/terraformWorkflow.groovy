@@ -204,7 +204,10 @@ def call(Map stepParams) {
   }
   else
   {
-    echo "Skipping execution because of non-master branch!!!!"
+    echo "Skipping execution because of non-master branch"
+    sendFailNotification(
+      message: "Failed to create Infrastructure due to non-master branch"
+    )
   }
   // try 
   // {
