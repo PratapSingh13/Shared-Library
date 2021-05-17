@@ -112,7 +112,7 @@ def call(Map stepParams) {
   } 
   catch (Exception e) 
   {
-    echo "Unable to initialize Terraform"
+    echo "Unable to initialize terraform"
     sendFailNotification(
       message: "Unable to initialize terraform"
     )
@@ -127,7 +127,7 @@ def call(Map stepParams) {
   } 
   catch (Exception e) 
   {
-    echo "Failed while formatting Terraform Code! Please look into your code"
+    echo "Failed while formatting terraform code! Please look into your code"
     sendFailNotification(
       message: "Failed while applying formatting into terraform code! Please look into your code"
     )
@@ -142,7 +142,7 @@ def call(Map stepParams) {
   } 
   catch (Exception e) 
   {
-    echo "Failed while Terraform Code Validation! Please look into your code"
+    echo "Failed while terraform code Validation! Please look into your code"
     sendFailNotification(
       message: "Failed while terraform code validation! Please look into your code"
     )
@@ -157,7 +157,7 @@ def call(Map stepParams) {
   } 
   catch (Exception e) 
   {
-    echo "Failed while linting Terraform Code! Please look into your code"
+    echo "Failed while linting terraform code! Please look into your code"
     sendFailNotification(
       message: "Failed while linting terraform code! Please look into your code"
     )
@@ -172,9 +172,9 @@ def call(Map stepParams) {
   } 
   catch (Exception e) 
   {
-    echo "Failed during planning Infrastructure"
+    echo "Failed during planning terraform code"
     sendFailNotification(
-      message: "Failed while terraform planning"
+      message: "Failed to plan terraform code"
     )
     echo e.toString()
     throw e
