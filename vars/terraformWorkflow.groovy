@@ -171,7 +171,7 @@ def call(Map stepParams) {
   {
     echo "Failed during planning Infrastructure"
     sendFailNotification(
-      message: "Failed while planning"
+      message: "Failed while planning" "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*BUILD_URL:* ${env.BUILD_URL}"
     )
     echo e.toString()
     throw e
@@ -205,7 +205,7 @@ def call(Map stepParams) {
   {
     echo "Skipping execution because of non-master branch"
     sendFailNotification(
-      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*BUILD_URL:* ${env.BUILD_URL}"
+      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*BUILD_URL:* ${env.BUILD_URL} \n*Message* AAPKI JOB FAILED HAI"
     )
   }
 }
