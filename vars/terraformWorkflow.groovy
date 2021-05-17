@@ -201,7 +201,7 @@ def call(Map stepParams) {
       throw e
     }
     sendSuccessNotification(
-      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD SUCCESSFULLY_ \n*Message:* Terraform build successfully applied \n*BUILD_URL:* ${env.BUILD_URL}" 
+      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _${stepParams.buildStatus}_ \n*Message:* Terraform build successfully applied \n*BUILD_URL:* ${env.BUILD_URL}" 
     )
   //}
   // else
