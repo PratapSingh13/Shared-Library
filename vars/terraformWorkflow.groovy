@@ -176,7 +176,7 @@ def call(Map stepParams) {
     echo e.toString()
     throw e
   }
-  if("${config.BRANCH_NAME}" == "master") 
+  if("${env.BRANCH_NAME}" == "master") 
   {
     if("${config.KEEP_APPROVAL_STAGE}" == "true" || "${config.KEEP_APPROVAL_STAGE}" == "null")
     {
