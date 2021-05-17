@@ -201,7 +201,7 @@ def call(Map stepParams) {
       throw e
     }
     sendSuccessNotification(
-      message: "Terraform build successfully applied" 
+      message: "Congratulations! Terraform build successfully applied" 
     )
   //}
   // else
