@@ -208,23 +208,4 @@ def call(Map stepParams) {
       message: "Failed to create Infrastructure due to non-master branch"
     )
   }
-  // try 
-  // {
-  //   //input message: 'Press Yes to apply changes', ok: 'YES'
-  //   createInfrastructure(
-  //     codeBasePath: "${config.CODE_BASE_PATH}"
-  //   )
-  // } 
-  // catch (Exception e) 
-  // {
-  //   echo "Unable to Apply Terraform"
-  //   sendFailNotification(
-  //     message: "Failed while applying"
-  //   )
-  //   echo e.toString()
-  //   throw e
-  // }
-  // sendSuccessNotification(
-  //   message: "Terraform build <strike>Successfully applied</strike>"   
-  // )
 }
