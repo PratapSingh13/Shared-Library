@@ -198,7 +198,7 @@ def call(Map stepParams) {
       throw e
     }
     sendSuccessNotification(
-      message: "Terraform build Successfully applied"   "Failed to create Infrastructure due to non-master branch" 
+      message: "Terraform build Successfully applied   Failed to create Infrastructure due to non-master branch" 
     )
   }
   else
