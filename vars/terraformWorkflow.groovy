@@ -87,7 +87,7 @@ def call(Map stepParams) {
   {
     echo "Unable to clone CodeBase"
     sendFailNotification(
-      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*Message:* Unable to clone CodeBase \n*BUILD_URL:* ${env.BUILD_URL}"
+      message: "Unable to clone CodeBase"
     )
     echo e.toString()
     throw e
@@ -114,7 +114,7 @@ def call(Map stepParams) {
   {
     echo "Unable to initialize Terraform"
     sendFailNotification(
-      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*Message:* Unable to initialize terraform \n*BUILD_URL:* ${env.BUILD_URL}"
+      message: "Unable to initialize terraform"
     )
     echo e.toString()
     throw e
@@ -129,7 +129,7 @@ def call(Map stepParams) {
   {
     echo "Failed while formatting Terraform Code! Please look into your code"
     sendFailNotification(
-      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*Message:* Failed while applying formatting into terraform code! Please look into your code \n*BUILD_URL:* ${env.BUILD_URL}"
+      message: "Failed while applying formatting into terraform code! Please look into your code"
     )
     echo e.toString()
     throw e
@@ -144,7 +144,7 @@ def call(Map stepParams) {
   {
     echo "Failed while Terraform Code Validation! Please look into your code"
     sendFailNotification(
-      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*Message:* Failed while terraform code validation! Please look into your code \n*BUILD_URL:* ${env.BUILD_URL}"
+      message: "Failed while terraform code validation! Please look into your code"
     )
     echo e.toString()
     throw e
@@ -159,7 +159,7 @@ def call(Map stepParams) {
   {
     echo "Failed while linting Terraform Code! Please look into your code"
     sendFailNotification(
-      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*Message:* Failed while linting terraform code! Please look into your code \n*BUILD_URL:* ${env.BUILD_URL}"
+      message: "Failed while linting terraform code! Please look into your code"
     )
     echo e.toString()
     throw e
@@ -174,7 +174,7 @@ def call(Map stepParams) {
   {
     echo "Failed during planning Infrastructure"
     sendFailNotification(
-      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*Message:* Failed while terraform planning \n*BUILD_URL:* ${env.BUILD_URL}"
+      message: "Failed while terraform planning"
     )
     echo e.toString()
     throw e
@@ -195,13 +195,13 @@ def call(Map stepParams) {
     {
       echo "Failed while creating Infrastructure"
       sendFailNotification(
-        message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*Message:* Failed while creating infrastructure \n*BUILD_URL:* ${env.BUILD_URL}"
+        message: "Failed while creating infrastructure"
       )
       echo e.toString()
       throw e
     }
     sendSuccessNotification(
-      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD SUCCESSFULLY_ \n*Message:* Terraform build successfully applied \n*BUILD_URL:* ${env.BUILD_URL}" 
+      message: "Terraform build successfully applied" 
     )
   //}
   // else
