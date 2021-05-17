@@ -198,14 +198,14 @@ def call(Map stepParams) {
       throw e
     }
     sendSuccessNotification(
-      message: "Terraform build Successfully applied"   
+      message: "Terraform build Successfully applied"   "Failed to create Infrastructure due to non-master branch" 
     )
   }
   else
   {
     echo "Skipping execution because of non-master branch"
     sendFailNotification(
-      message: "Failed to create Infrastructure due to non-master branch"
+      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${user}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _${stepParams.buildStatus}_ \n*BUILD_URL:* ${env.BUILD_URL}"
     )
   }
 }
