@@ -86,6 +86,9 @@ def call(Map stepParams) {
   catch (Exception e) 
   {
     echo "Unable to clone CodeBase"
+    sendFailNotification(
+      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*Message:* Unable to clone CodeBase \n*BUILD_URL:* ${env.BUILD_URL}"
+    )
     echo e.toString()
     throw e
   }
@@ -111,7 +114,7 @@ def call(Map stepParams) {
   {
     echo "Unable to initialize Terraform"
     sendFailNotification(
-      message: "Unable to initialize Terraform"
+      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*Message:* Unable to initialize terraform \n*BUILD_URL:* ${env.BUILD_URL}"
     )
     echo e.toString()
     throw e
@@ -126,7 +129,7 @@ def call(Map stepParams) {
   {
     echo "Failed while formatting Terraform Code! Please look into your code"
     sendFailNotification(
-      message: "Failed while linting Terraform Code! Please look into your code"
+      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*Message:* Failed while applying formatting into terraform code! Please look into your code \n*BUILD_URL:* ${env.BUILD_URL}"
     )
     echo e.toString()
     throw e
@@ -141,7 +144,7 @@ def call(Map stepParams) {
   {
     echo "Failed while Terraform Code Validation! Please look into your code"
     sendFailNotification(
-      message: "Failed while Terraform Code Validation! Please look into your code"
+      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*Message:* Failed while terraform code validation! Please look into your code \n*BUILD_URL:* ${env.BUILD_URL}"
     )
     echo e.toString()
     throw e
@@ -156,7 +159,7 @@ def call(Map stepParams) {
   {
     echo "Failed while linting Terraform Code! Please look into your code"
     sendFailNotification(
-      message: "Failed while linting Terraform Code! Please look into your code"
+      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*Message:* Failed while linting terraform code! Please look into your code \n*BUILD_URL:* ${env.BUILD_URL}"
     )
     echo e.toString()
     throw e
@@ -171,13 +174,13 @@ def call(Map stepParams) {
   {
     echo "Failed during planning Infrastructure"
     sendFailNotification(
-      message: "Failed while planning"
+      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*Message:* Failed while terraform planning \n*BUILD_URL:* ${env.BUILD_URL}"
     )
     echo e.toString()
     throw e
   }
-  if("${env.BRANCH_NAME}" == "master") 
-  {
+  //if("${env.BRANCH_NAME}" == "master") 
+  //{
     if("${config.KEEP_APPROVAL_STAGE}" == "true" || "${config.KEEP_APPROVAL_STAGE}" == "null")
     {
       commonfile.approvalStep()
@@ -192,20 +195,20 @@ def call(Map stepParams) {
     {
       echo "Failed while creating Infrastructure"
       sendFailNotification(
-        message: "Failed while creating Infrastructure"
+        message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*Message:* Failed while creating infrastructure \n*BUILD_URL:* ${env.BUILD_URL}"
       )
       echo e.toString()
       throw e
     }
     sendSuccessNotification(
-      message: "Terraform build Successfully applied   Failed to create Infrastructure due to non-master branch" 
+      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD SUCCESSFULLY_ \n*Message:* Terraform build successfully applied \n*BUILD_URL:* ${env.BUILD_URL}" 
     )
-  }
-  else
-  {
-    echo "Skipping execution because of non-master branch"
-    sendFailNotification(
-      message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD FAILED_ \n*BUILD_URL:* ${env.BUILD_URL} \n*Message* AAPKI JOB FAILED HAI"
-    )
-  }
+  //}
+  // else
+  // {
+  //   echo "Skipping execution because of non-master branch"
+  //   sendFailNotification(
+  //     message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD SUCCESSFULLY_ \n*Message:* Failed to create Infrastructure due to non-master branch \n*BUILD_URL:* ${env.BUILD_URL}"
+  //   )
+  // }
 }
