@@ -179,36 +179,26 @@ def call(Map stepParams) {
     echo e.toString()
     throw e
   }
-  //if("${env.BRANCH_NAME}" == "master") 
-  //{
-    if("${config.KEEP_APPROVAL_STAGE}" == "true" || "${config.KEEP_APPROVAL_STAGE}" == "null")
-    {
-      commonfile.approvalStep()
-    }
-    try
-    {
-      createInfrastructure(
-        codeBasePath: "${config.CODE_BASE_PATH}"
-      )
-    }
-    catch (Exception e) 
-    {
-      echo "Failed while creating Infrastructure"
-      sendFailNotification(
-        message: "Failed while creating infrastructure"
-      )
-      echo e.toString()
-      throw e
-    }
-    sendSuccessNotification(
-      message: "Congratulations! Terraform build successfully applied" 
+  if("${config.KEEP_APPROVAL_STAGE}" == "true" || "${config.KEEP_APPROVAL_STAGE}" == "null")
+  {
+    commonfile.approvalStep()
+  }
+  try
+  {
+    createInfrastructure(
+      codeBasePath: "${config.CODE_BASE_PATH}"
     )
-  //}
-  // else
-  // {
-  //   echo "Skipping execution because of non-master branch"
-  //   sendFailNotification(
-  //     message: "*Job:* ${env.JOB_NAME} \n*Started by:* User *_${env.BUILD_USER_ID}_* \n*Build Number:* ${env.BUILD_NUMBER} \n*Status:* _BUILD SUCCESSFULLY_ \n*Message:* Failed to create Infrastructure due to non-master branch \n*BUILD_URL:* ${env.BUILD_URL}"
-  //   )
-  // }
+  }
+  catch (Exception e) 
+  {
+    echo "Failed while creating Infrastructure"
+    sendFailNotification(
+      message: "Failed while creating infrastructure"
+    )
+    echo e.toString()
+    throw e
+  }
+  sendSuccessNotification(
+    message: "Congratulations! Terraform build successfully applied" 
+  )
 }
