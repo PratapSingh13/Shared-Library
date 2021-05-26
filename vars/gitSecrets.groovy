@@ -3,7 +3,7 @@ def provisionReporting() {
         stage("Initializing Job Properties") {
             checkout scm
         }
-        String[] arr = [ "git@github.com:PratapSingh13/Java.git"]
+        String[] arr = [ "https://github.com/PratapSingh13/Java.git"]
         stage('Cloning and Scan Repository'){
            sh "rm -rf *"
            sh "mkdir secret_scan"
@@ -15,7 +15,7 @@ def provisionReporting() {
                sh "rm -rf AWS"
                sh "mkdir AWS"
                dir("AWS") {
-                    git credentialsId: '', url: "${repo}"
+                    git credentialsId: 'GitHub', url: "${repo}"
                     sh label: '', script: '{ git secrets --scan; } 2> secretkeys.txt | true'
                     def count = sh(script: 'cat secretkeys.txt | wc -l', returnStdout: true).trim()
                     if(count != "1")
