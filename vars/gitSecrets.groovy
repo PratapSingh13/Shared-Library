@@ -1,7 +1,5 @@
 #!/usr/bin/env groovy
 def provisionReporting() {
-    def nodelabel = "master"
-    node(nodelabel){
         stage("Initializing Job Properties") {
             checkout scm
         }
@@ -34,5 +32,4 @@ def provisionReporting() {
               to: "yogendrapratapsingh70@gmail.com"
             }
         }
-    }
 }
