@@ -17,7 +17,7 @@ def provisionReporting() {
                sh 'pwd'
                dir("AWS") {
                     sh 'pwd'
-                    git credentialsId: 'GitHub', url: "${repo}"
+                    git credentialsId: 'GitHub', url: '${repo}'
                     sh label: '', script: '{ git secrets --scan; } 2> secretkeys.txt | true'
                     def count = sh(script: 'cat secretkeys.txt | wc -l', returnStdout: true).trim()
                     if(count != "1")
