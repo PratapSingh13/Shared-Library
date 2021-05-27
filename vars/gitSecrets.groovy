@@ -14,7 +14,9 @@ def provisionReporting() {
                project = split_repo[0]
                sh "rm -rf AWS"
                sh "mkdir AWS"
+               sh 'pwd'
                dir("AWS") {
+                    sh 'pwd'
                     git credentialsId: 'GitHub', url: "${repo}"
                     sh label: '', script: '{ git secrets --scan; } 2> secretkeys.txt | true'
                     def count = sh(script: 'cat secretkeys.txt | wc -l', returnStdout: true).trim()
