@@ -1,7 +1,5 @@
 #!/usr/bin/env groovy
 def provisionReporting() {
-    node 
-{
     deleteDir()
     String[] arr = [ "https://github.com/PratapSingh13/Java.git", "https://github.com/PratapSingh13/Shared-Library.git", "https://github.com/PratapSingh13/Java.git" ] 
     stage('Cloning Repository')
@@ -53,5 +51,4 @@ def provisionReporting() {
             }
         }
     }
-}
 }
