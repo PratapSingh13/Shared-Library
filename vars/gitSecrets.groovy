@@ -5,9 +5,7 @@ def provisionReporting() {
         stage("Initializing Job Properties") {
             checkout scm
         }
-        String[] arr = [ "git@github.com:PratapSingh13/Java.git",
-                         "git@github.com/PratapSingh13/Java.git"
-                       ]
+        String[] arr = [ "https://github.com/PratapSingh13/Java.git"]
         stage('Cloning and Scan Repository'){
            sh "rm -rf *"
            sh "mkdir secret_scan"
