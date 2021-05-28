@@ -23,7 +23,7 @@ def provisionReporting() {
                     sh 'pwd'
                     def count = sh(script: 'cat secretkeys.txt | wc -l', returnStdout: true).trim()
                     sh 'cat secretkeys.txt'
-                    def count = sh(script: 'cat secretkeys.txt)
+                    //def count = sh(script: 'cat secretkeys.txt)
                     if(count != "1")
                     sh "cp secretkeys.txt ../secret_scan/${project}.txt"
                }
