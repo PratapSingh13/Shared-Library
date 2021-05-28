@@ -5,7 +5,7 @@ def provisionReporting() {
         stage("Initializing Job Properties") {
             checkout scm
         }
-        String[] arr = [ "https://github.com/PratapSingh13/Java.git"]
+        String[] arr = [ "https://github.com/PratapSingh13/Java.git", "https://github.com/PratapSingh13/Shared-Library.git"]
         stage('Cloning and Scan Repository'){
            sh "rm -rf *"
            sh "mkdir secret_scan"
@@ -23,7 +23,7 @@ def provisionReporting() {
                     sh 'pwd'
                     def count = sh(script: 'cat secretkeys.txt | wc -l', returnStdout: true).trim()
                     sh 'cat secretkeys.txt'
-                    //def count = sh(script: 'cat secretkeys.txt)
+                    count = sh(script: 'cat secretkeys.txt)
                     if(count != "1")
                     sh "cp secretkeys.txt ../secret_scan/${project}.txt"
                }
