@@ -4,7 +4,7 @@ def provisionReporting(Map stepParams)
     git_url = stepParams.git_url
     stage('Credentials Scanning')
     {
-        split_url = repo_url.split('/')
+        split_url = git_url.split('/')
         repo_name = split_url[split_url.length-1]
         split_repo = repo_name.split('.git')
         project = split_repo[0]
