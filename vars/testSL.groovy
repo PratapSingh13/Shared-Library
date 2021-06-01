@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-def call(Map stepParams)
+def buildDeployer(Map stepParams)
 {
     try
     {
