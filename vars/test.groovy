@@ -29,7 +29,8 @@ def buildDeployer(Map stepParams)
       //echo '${config.env}'
        //def env = "testing"
         echo "${config.env}"
-        sh "aws s3 cp s3://da-app-configuration/${config.env}/web/application/gulpfile.js ."
+        echo "${config.bucket_name}"
+        sh "aws s3 cp s3://${config.bucket_name}/${config.env}/web/application/gulpfile.js ."
     }
     catch (Exception e)
     {
