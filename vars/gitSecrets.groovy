@@ -17,7 +17,6 @@ def provisionReporting() {
                sh "rm -rf AWS"
                sh "mkdir AWS"
                dir("AWS") {
-                    //git credentialsId: 'GitHub', url: 'https://github.com/PratapSingh13/Java.git'
                     checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'GitHub', url: "${repo}"]]])
                     sh label: '', script: '{ git secrets --scan; } 2> secretkeys.txt | true'
                     sh 'pwd'
