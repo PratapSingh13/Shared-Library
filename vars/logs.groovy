@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 def log_info(message) {
   echo "INFO: ${message}"
 }
