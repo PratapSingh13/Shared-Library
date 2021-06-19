@@ -1,9 +1,9 @@
 def log_info(message) {
-    echo "INFO: ${message}"
+  echo "INFO: ${message}"
 }
 
 def log_warning(message) {
-    echo "WARNING: ${message}"
+  echo "WARNING: ${message}"
 }
 
 def log_error(message) {
