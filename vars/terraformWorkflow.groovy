@@ -149,7 +149,7 @@ def call(Map stepParams) {
         echo e.toString()
         throw e
     }
-    try 
+    /*try 
     {
         lintingTerraformCode(
             codeBasePath: "${config.CODE_BASE_PATH}"
@@ -163,7 +163,7 @@ def call(Map stepParams) {
         )
         echo e.toString()
         throw e
-    }
+    }*/
     try 
     {
         planInfrastructure(
