@@ -47,3 +47,20 @@ ENVIRONMENT = prod
 ![](/img/terraformWorkflow.png)
 
 ---
+## Development
+### Development Requirements
+ - Terraform (In Jenkins Server)
+ - AWS Configure (In Jenkins Server)
+### Configure environment variables
+
+```shell
+export AWS_ACCESS_KEY_ID=AKIA....................
+export AWS_SECRET_ACCESS_KEY=wJal..............................
+export AWS_DEFAULT_REGION=us-east-1
+```
+
+### Contributors
+[![Yogendra Pratap Singh][yogendra_avatar]][yogendra_homepage]<br/>[Yogendra Pratap Singh][yogendra_homepage] 
+
+  [yogendra_homepage]: https://github.com/PratapSingh13
+  [yogendra_avatar]: https://img.cloudposse.com/75x75/https://github.com/PratapSingh13.png
