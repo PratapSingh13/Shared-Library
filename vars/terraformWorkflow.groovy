@@ -35,7 +35,7 @@ def planInfrastructure(Map stepParams)
     {
         terraformAction.executeAction(
             codePath: "${config.CODE_BASE_PATH}",
-            operation: "plan"
+            operation: "plan -lock=false"
         )
     }
 }
