@@ -81,6 +81,7 @@ def sendFailNotification(Map stepParams)
 def call(Map stepParams) {
     try 
     {
+        commonfile.cleanWorkspace()
         git.checkoutCode()
     } 
     catch (Exception e) 
